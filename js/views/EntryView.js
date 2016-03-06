@@ -27,6 +27,8 @@ define([
 
     getCharacterData: function(){
       var selected_character = this.$('#character_select').val();
+      var char_icon_src = "assets/characters/fefates-icon-" + selected_character.toLowerCase()+".jpg";
+      this.$('#character-icon').attr('src', char_icon_src);
       this.model.select_character(selected_character);
       this.model.getJsonData();
     },

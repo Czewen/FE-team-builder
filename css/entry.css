@@ -1,0 +1,44 @@
+#character-entry{
+  background-color: #ffcc66;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: Georgia;
+}
+
+#character_options{
+  margin-left:10px;
+  margin-top: 10px;
+  padding-bottom:10px;
+}
+#character{
+  margin-left: 10px; 
+  display: flex; 
+}
+
+#character-icon{
+  margin-top:10px;
+  border-radius: 10px;
+}
+
+#character-stats{
+  text-indent: 5px;
+  margin-top: 10px;
+  margin-left: 5px;
+  width: 80px;
+  text-align: center;
+}
+
+.stats{
+  background-color: #e69900;
+  margin-top: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  border-color: white;
+}
+
+
+
+
+

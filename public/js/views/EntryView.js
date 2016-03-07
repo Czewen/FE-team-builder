@@ -12,32 +12,47 @@ define([
     events: {
       'change #character_select' : 'getCharacterData',
       'change #romantic_supports' : 'addRomanticSupportBaseClasses',
-      'change #aplus_supports' : 'addAplusSupportBaseClasses'
+      'change #aplus_supports' : 'addAplusSupportBaseClasses',
+      'change #character_classes' : 'getClassStats'
     },
 
     addAplusSupportBaseClasses: function(){
       var selected_support = this.$('#aplus_supports').val();
-      this.model.add_support_classes(selected_support);
+      this.model.addSupportClasses(selected_support);
     },
 
     addRomanticSupportBaseClasses: function(){
       var selected_support = this.$('#romantic_supports').val();
-      this.model.add_support_classes(selected_support);
+      this.model.addSupportClasses(selected_support);
     },
 
     getCharacterData: function(){
       var selected_character = this.$('#character_select').val();
-      var char_icon_src = "assets/characters/fefates-icon-" + selected_character.toLowerCase()+".jpg";
+      var char_icon_src = "public/assets/characters/fefates-icon-" + selected_character.toLowerCase()+".jpg";
+      this.clearClassStats();
       this.$('#character-icon').attr('src', char_icon_src);
       this.model.select_character(selected_character);
       this.model.getJsonData();
     },
 
+    getClassStats: function(){
+      var selected_class = this.$('#character_classes').val();
+      this.model.getClassStats(selected_class);
+    },
+
+    clearClassStats: function(){
+      this.$('#hp').text('HP: ');
+      this.$('#str').text('Str: ');
+      this.$('#mag').text('Mag: ');
+      this.$('#skill').text('Skill: ');
+    },
+
     initialize: function(){
       this.model.on('change:class', this.showUpdatedClasses, this);
-      this.model.on('change:character_json', this.model.assign_classes, this.model);
-      this.model.on('change:supports_json', this.model.assign_supports, this.model);
+      this.model.on('change:character_json', this.model.assignClasses, this.model);
+      this.model.on('change:supports_json', this.model.assignSupports, this.model);
       this.model.on('change:romantic_supports change:aplus_supports', this.showUpdatedSupports, this);
+      this.model.on('change:current_class_stats', this.showClassData, this);
     },
 
     showUpdatedClasses: function(){
@@ -83,6 +98,14 @@ define([
 
     test: function(){
       console.log("do nothing");
+    },
+
+    showClassData: function(){
+      var class_stats = this.model.get('current_class_stats');
+      this.$('#hp').text('HP: '+class_stats['hp']);
+      this.$('#str').text('Str: '+class_stats['str']);
+      this.$('#mag').text('Mag: '+class_stats['mag']);
+      this.$('#skill').text('Skill: '+class_stats['skl']);
     },
 
     render: function(){

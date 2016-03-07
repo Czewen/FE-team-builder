@@ -1,0 +1,201 @@
+{
+  "Hoshido Noble": {
+    "hp": 60,"str": 34, "mag": 28, "skl": 29, "spd": 30, "lck": 33, "def": 31, "res": 28,
+    "Weapon ranks": {
+      "swords": "A",
+      "staves": "B",
+      "dragonstone": "A" 
+    }
+  },
+
+  "Samurai": {
+    "hp": 40,"str": 20, "mag": 16, "skl": 23, "spd": 25, "lck": 24, "def": 18, "res": 20,
+    "Weapon ranks": {
+      "swords": "B"
+    }
+  },
+
+  "Swordmaster": {
+    "hp": 55,"str": 30, "mag": 28, "skl": 32, "spd": 35, "lck": 33, "def": 27, "res": 31,
+    "Weapon ranks": {
+      "swords": "S"
+    }
+  },
+
+  "Master of Arms": {
+    "hp": 65,"str": 33, "mag": 25, "skl": 30, "spd": 30, "lck": 31, "def": 31, "res": 28,
+    "Weapon ranks": {
+      "swords": "A",
+      "spears": "B",
+      "axes": "B"
+    }
+  },
+
+  "Oni Savage": {
+    "hp": 45,"str": 24, "mag": 19, "skl": 16, "spd": 20, "lck": 17, "def": 23, "res": 18,
+    "Weapon ranks": {
+      "axes": "B"
+    }
+  },
+  
+  "Oni Chieftain": {
+    "hp": 60,"str": 34, "mag": 28, "skl": 25, "spd": 30, "lck": 25, "def": 36, "res": 31,
+    "Weapon ranks": {
+      "swords": "A",
+      "tomes": "B"
+    }
+  },
+
+  "Blacksmith": {
+    "hp": 65,"str": 33, "mag": 25, "skl": 32, "spd": 31, "lck": 30, "def": 32, "res": 27,
+    "Weapon ranks": {
+      "swords": "B",
+      "axes": "A"
+    }
+  },
+
+  "Spear Fighter": {
+    "hp": 40,"str": 22, "mag": 15, "skl": 23, "spd": 22, "lck": 21, "def": 22, "res": 21,
+    "Weapon ranks": {
+      "spears": "B"
+    }
+  },
+
+  "Spear Master": {
+    "hp": 60,"str": 34, "mag": 25, "skl": 33, "spd": 32, "lck": 29, "def": 30, "res": 29,
+    "Weapon ranks": {
+      "spears": "S"
+    }
+  },
+
+  "Basara": {
+    "hp": 65,"str": 31, "mag": 30, "skl": 30, "spd": 31, "lck": 35, "def": 30, "res": 32,
+    "Weapon ranks": {
+      "spears": "A",
+      "tomes": "B"
+    }
+  },
+
+  "Diviner": {
+    "hp": 35,"str": 17, "mag": 22, "skl": 20, "spd": 23, "lck": 19, "def": 16, "res": 20,
+    "Weapon ranks": {
+      "tomes": "B"
+    }
+  },
+
+  "Onmyoji": {
+    "hp": 45,"str": 25, "mag": 33, "skl": 31, "spd": 32, "lck": 27, "def": 25, "res": 31,
+    "Weapon ranks": {
+      "tomes": "A",
+      "staves": "B"
+    }
+  },
+
+  "Monk": {
+    "hp": 35,"str": 18, "mag": 21, "skl": 20, "spd": 22, "lck": 23, "def": 17, "res": 24,
+    "Weapon ranks": {
+      "staves": "B"
+    }
+  },
+
+  "Shrine Maiden": {
+    "hp": 35,"str": 18, "mag": 21, "skl": 20, "spd": 22, "lck": 23, "def": 17, "res": 24,
+    "Weapon ranks": {
+      "staves": "B"
+    }
+  },
+
+  "Great Master": {
+    "hp": 55,"str": 32, "mag": 30, "skl": 31, "spd": 33, "lck": 32, "def": 28, "res": 32,
+    "Weapon ranks": {
+      "spears": "B",
+      "staves": "A"
+    }
+  },
+
+  "Priestess": {
+    "hp": 50,"str": 29, "mag": 32, "skl": 30, "spd": 33, "lck": 34, "def": 26, "res": 34,
+    "Weapon ranks": {
+      "bows": "B",
+      "staves": "A"
+    }
+  },
+
+  "Sky Knight": {
+    "hp": 35,"str": 19, "mag": 16, "skl": 21, "spd": 23, "lck": 25, "def": 18, "res": 25,
+    "Weapon ranks": {
+      "spears": "B"
+    }
+  },
+
+  "Falcon Knight": {
+    "hp": 55,"str": 28, "mag": 27, "skl": 30, "spd": 34, "lck": 35, "def": 27, "res": 35,
+    "Weapon ranks": {
+      "spears": "A",
+      "staves": "B"
+    }
+  },
+
+  "Kinshi Knight": {
+    "hp": 50,"str": 27, "mag": 26, "skl": 33, "spd": 31, "lck": 34, "def": 25, "res": 31,
+    "Weapon ranks": {
+      "spears": "B",
+      "bows": "A"
+    }
+  }, 
+
+  "Archer": {
+    "hp": 40,"str": 21, "mag": 15, "skl": 23, "spd": 21, "lck": 20, "def": 20, "res": 17,
+    "Weapon ranks": {
+      "bows": "B"
+    }
+  },
+
+  "Sniper": {
+    "hp": 55,"str": 31, "mag": 25, "skl": 35, "spd": 33, "lck": 30, "def": 31, "res": 28,
+    "Weapon ranks": {
+      "bows": "S"
+    }
+  },
+
+  "Ninja": {
+    "hp": 35,"str": 17, "mag": 15, "skl": 25, "spd": 25, "lck": 18, "def": 19, "res": 20,
+    "Weapon ranks": {
+      "throwing weapon": "B"
+    }
+  },
+
+  "Master Ninja": {
+    "hp": 55,"str": 27, "mag": 25, "skl": 35, "spd": 35, "lck": 28, "def": 26, "res": 34,
+    "Weapon ranks": {
+      "throwing weapon": "S",
+      "swords": "B"
+    }
+  },
+
+  "Mechanist": {
+    "hp": 60,"str": 30, "mag": 25, "skl": 33, "spd": 30, "lck": 30, "def": 31, "res": 31,
+    "Weapon ranks": {
+      "throwing weapon": "A",
+      "bows": "B"
+    }
+  },
+
+  "Apothecary": {
+    "hp": 45,"str": 24, "mag": 15, "skl": 19, "spd": 19, "lck": 21, "def": 23, "res": 20,
+    "Weapon ranks": {
+      "bows": "B"
+    }
+  },
+
+  "Merchant": {
+    "hp": 65,"str": 33, "mag": 25, "skl": 29, "spd": 28, "lck": 32, "def": 33, "res": 30,
+    "Weapon ranks": {
+      "spears": "B", 
+      "bows": "A"
+    }
+  }
+
+
+
+}

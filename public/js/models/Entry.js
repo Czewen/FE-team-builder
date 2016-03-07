@@ -4,7 +4,7 @@ define([
   'backbone'
 ], function($, _, Backbone){
 
-    var json_path = "js/json/";
+    var json_path = "public/js/json/";
     var array = [];
     //fuck you javascript
     var entry = Backbone.Model.extend({
@@ -13,6 +13,7 @@ define([
         class: [],
         gender: "",
         stat_mods: {},
+        current_class_stats: {}, 
         romantic_supports: [],
         aplus_supports: [],
         character_json: {},
@@ -46,19 +47,15 @@ define([
       this.set({class: classes});
     },
 
-    assign_classes: function(){
+    assignClasses: function(){
       var result=[];
-      // $.getJSON(json_path+"characters.js", (function(model, character){
-      //   return function(data){
-          // var character_info = data[character];
       var character_json = this.get('character_json');
       var class_array = character_json['base_class'].concat(character_json['class']);
       this.set({class: class_array, stat_mods: character_json['stat_mods'], gender: character_json['gender']});
-      //   };
-      // })(this, this.get('character')));
+      this.getClassStats(class_array[0]); //Show stats for default class of character
     },
 
-    assign_supports: function(){
+    assignSupports: function(){
       // $.getJSON(json_path+"supports.js", (function(model, character){
       //   return function(data){
         var character_supports = this.get('supports_json');
@@ -73,7 +70,7 @@ define([
       // })(this, this.get('character')));
     },
 
-    add_support_classes: function(support){
+    addSupportClasses: function(support){
       $.getJSON(json_path+'characters.js', (function(model, character){
         return function(data){
           var character_info = data[character];
@@ -88,6 +85,21 @@ define([
           model.trigger('change:class');
         }
       })(this, support));
+    },
+
+    getClassStats: function(class_name){
+      $.getJSON(json_path+'classes.json', (function(model, class_name){
+        return function(data){
+          var class_name_parsed = class_name.replace(/_/g, ' ');
+          var class_info = data[class_name_parsed];
+          var character_stat_mods = model.get('stat_mods')
+          for(var k in character_stat_mods){
+            class_info[k]+= character_stat_mods[k];
+          }
+          model.set({current_class_stats: class_info});
+          model.trigger('change:current_class_stats')
+        }
+      })(this, class_name));
     }
 
   });

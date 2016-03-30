@@ -1,6 +1,6 @@
 {
   "Hana":{
-    "stat_mods": {"str": 1, "mag": 0, "skl_mod": 1, "spd": 2, "lck": -1, "def": 2, "res": 0},
+    "stat_mods": {"str": 1, "mag": 0, "skl_mod": 1, "spd": 2, "lck": -1, "def": -3, "res": 0},
     "gender": "female",
     "base_class": ["Samurai" , "Swordmaster" , "Master of Arms"],
     "class": ["Shrine Maiden", "Priestess", "Onmyoji"]

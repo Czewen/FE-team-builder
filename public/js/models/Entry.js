@@ -4,9 +4,8 @@ define([
   'backbone'
 ], function($, _, Backbone){
 
-    var json_path = "public/js/json/";
+    var json_path = "public/assets/json/";
     var array = [];
-    //fuck you javascript
     var entry = Backbone.Model.extend({
       defaults: {
         character: '',
@@ -47,25 +46,25 @@ define([
       this.set({class: classes});
     },
 
-    assignClasses: function(){
+    assignClasses: function(model){
       var result=[];
-      var character_json = this.get('character_json');
+      var character_json = model.get('character_json');
       var class_array = character_json['base_class'].concat(character_json['class']);
-      this.set({class: class_array, stat_mods: character_json['stat_mods'], gender: character_json['gender']});
-      this.getClassStats(class_array[0]); //Show stats for default class of character
+      model.set({class: class_array, stat_mods: character_json['stat_mods'], gender: character_json['gender']});
+      model.getClassStats(class_array[0]); //Show stats for default class of character
     },
 
-    assignSupports: function(){
+    assignSupports: function(model){
       // $.getJSON(json_path+"supports.js", (function(model, character){
       //   return function(data){
-        var character_supports = this.get('supports_json');
-        var romantic_supports = character_supports['hoshido'].concat(character_supports['nohr']);
-        romantic_supports = romantic_supports.concat(character_supports['both_routes']);
-        var aplus_support_obj = character_supports['A+_support'];
-        var aplus_supports = aplus_support_obj['hoshido'].concat(aplus_support_obj['nohr']);
-        aplus_supports = aplus_supports.concat(aplus_support_obj['both_routes']);
-        this.set({romantic_supports: romantic_supports, aplus_supports: aplus_supports});
-        var done ="true";
+      var character_supports = model.get('supports_json');
+      var romantic_supports = character_supports['hoshido'].concat(character_supports['nohr']);
+      romantic_supports = romantic_supports.concat(character_supports['both_routes']);
+      var aplus_support_obj = character_supports['A+_support'];
+      var aplus_supports = aplus_support_obj['hoshido'].concat(aplus_support_obj['nohr']);
+      aplus_supports = aplus_supports.concat(aplus_support_obj['both_routes']);
+      this.set({romantic_supports: romantic_supports, aplus_supports: aplus_supports});
+      var done ="true";
       //   }
       // })(this, this.get('character')));
     },

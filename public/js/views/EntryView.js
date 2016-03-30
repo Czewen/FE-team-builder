@@ -2,18 +2,25 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/templates.html'
-], function($, _, Backbone, entryTemplate){
-
+  'models/SkillList',
+  'views/SkillView',
+  'text!templates/templates.html',
+  'text!templates/SkillList.html'
+], function($, _, Backbone, SkillList, SkillView, entryTemplate, skillListTemplate){
+  // var skill_list = new SkillList();
+  var skill_list;
   var entryView = Backbone.View.extend({
     tagname: 'li',
     template: _.template(entryTemplate),
+    skillListTemplate: _.template(skillListTemplate),
 
     events: {
       'change #character_select' : 'getCharacterData',
       'change #romantic_supports' : 'addRomanticSupportBaseClasses',
       'change #aplus_supports' : 'addAplusSupportBaseClasses',
-      'change #character_classes' : 'getClassStats'
+      'change #character_classes' : 'getClassStats',
+      'click .skill_select' : 'createSkill',
+      'click .remove_skill' : 'removeSkill'
     },
 
     addAplusSupportBaseClasses: function(){
@@ -45,14 +52,27 @@ define([
       this.$('#str').text('Str: ');
       this.$('#mag').text('Mag: ');
       this.$('#skill').text('Skill: ');
+      this.$('#spd').text('Spd: ');
+      this.$('#lck').text('Lck: ');
+      this.$('#Def').text('def: ');
+      this.$('#Res').text('res: ');
     },
 
-    initialize: function(){
-      this.model.on('change:class', this.showUpdatedClasses, this);
+    initialize: function(options){
+      this.listenTo(this.model, 'change:class', this.showUpdatedClasses);
       this.model.on('change:character_json', this.model.assignClasses, this.model);
       this.model.on('change:supports_json', this.model.assignSupports, this.model);
-      this.model.on('change:romantic_supports change:aplus_supports', this.showUpdatedSupports, this);
-      this.model.on('change:current_class_stats', this.showClassData, this);
+      this.listenTo(this.model, 'change:romantic_supports change:aplus_supports', this.showUpdatedSupports);
+      this.listenTo(this.model, 'change:current_class_stats', this.showClassData);
+      this.parent = options.parent;
+      this.model.on('destroy', this.remove, this);
+      this.skill_list = new SkillList();
+      // this.skill_list.on('add', this.addSkill, this);
+      this.listenTo(this.skill_list, 'add', this.addSkill);
+    },
+
+    getSkillList: function(){
+      return this.skill_list;
     },
 
     showUpdatedClasses: function(){
@@ -106,11 +126,72 @@ define([
       this.$('#str').text('Str: '+class_stats['str']);
       this.$('#mag').text('Mag: '+class_stats['mag']);
       this.$('#skill').text('Skill: '+class_stats['skl']);
+      this.$('#spd').text('Spd: '+class_stats['spd']);
+      this.$('#lck').text('Lck: '+class_stats['lck']);
+      this.$('#def').text('Def: '+class_stats['def']);
+      this.$('#res').text('Res: '+class_stats['res']);
     },
 
     render: function(){
       this.$el.html(this.template(this.model.toJSON()));
+      this.$('#character').append(this.skillListTemplate());
+      var skill_data = this.parent.getSkills()[0];
+      var skill_dropdown = this.$('#skills_dropdown_menu');
+      var container = document.createDocumentFragment();
+      for(var skill in skill_data){
+        // skill_dropdown.append("<li class='skill_select'>"+skill+"</li>");
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = "<li class='skill_select'>"+skill+"</li>";
+        var elements = wrapper.childNodes;
+        container.appendChild(elements[0]);
+      }
+      skill_dropdown.append(container);
       return this;
+    },
+
+    remove: function(){
+      this.model.off('change:character_json', this.model.assignClasses, this.model);
+      this.model.off('change:supports_json', this.model.assignSupports, this.model);
+      // this.skill_list.off('add', this.addSkill, this);
+      //this.listenTo(this.model, 'change:supports_json', this.model.assignSupports(this.model));
+    },
+
+    createSkill: function(ev){
+      var skill_name = ev.target.innerText;
+      var skill_data = this.parent.getSkills()[0];
+      var activation_rate = skill_data[skill_name];
+      var skill_entry = {skill_name: skill_name, activation_rate: activation_rate};
+      this.skill_list.create(skill_entry);
+      this.removeSkillFromOptions(skill_name);
+      // this.$('#skills_dropdown_menu').hide();
+    },
+
+    addSkill: function(entry){
+      var view = new SkillView({model: entry});
+      this.$('#skill_list').append(view.render().el);
+    },
+
+    removeSkill: function(ev){
+      var skill_name = ev.target.parentNode.innerText;
+      //remove new line characters
+      skill_name = skill_name.replace(/\r?\n|\r/g, '');
+      ev.target.parentNode.remove();
+      this.addSkillToOptions(skill_name);
+    },
+
+    addSkillToOptions: function(skill){
+      var skill_dropdown = this.$('#skills_dropdown_menu');
+      skill_dropdown.append("<li class='skill_select'>"+skill+"</li>");
+    },
+
+    removeSkillFromOptions: function(skill_name){
+      var skills = this.$('#character-entry').find('.skill_select');
+      for(var i=0; i<skills.length; i++){
+        if(skills[i].innerText.includes(skill_name)){
+          skills[i].remove();
+          break;
+        }
+      }
     }
   });
   return entryView;

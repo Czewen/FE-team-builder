@@ -16,9 +16,13 @@ define([
         romantic_supports: [],
         aplus_supports: [],
         character_json: {},
-        supports_json: {}
+        supports_json: {},
+        romantic_support_classes: [],
+        aplus_support_classes: []
       },
 
+      //could probably just use set instead as we dont have  persistent storage
+      //at the moment
     getJsonData: function(){
       $.getJSON(json_path+'characters.js', (function(character, model){
           return function(data){
@@ -69,22 +73,50 @@ define([
       // })(this, this.get('character')));
     },
 
-    addSupportClasses: function(support){
-      $.getJSON(json_path+'characters.js', (function(model, character){
+    addSupportClasses: function(support, support_type){
+      $.getJSON(json_path+'characters.js', (function(model, support_character){
         return function(data){
-          var character_info = data[character];
-          var support_base_classes = character_info['base_class'];
+          var character_json = model.get('character_json');
+          var default_classes = character_json['base_class'].concat(character_json['class']);
+          var support_character_info = data[support_character];
+          var support_base_classes = support_character_info['base_class'];
           var current_classes = model.get('class');
+          var added_classes = [];
+          if(support_type == "romantic"){
+            model.removeOldSupportClasses(current_classes, model.get('romantic_support_classes'));
+          }
+          else{
+            model.removeOldSupportClasses(current_classes, model.get('aplus_support_classes'));
+          }
+
           for(var i=0; i<support_base_classes.length; i++){
             if(current_classes.indexOf(support_base_classes[i])== -1){
-              current_classes.push(support_base_classes[i]);
+              var support_base_class = support_base_classes[i];
+              current_classes.push(support_base_class);
+              added_classes.push(support_base_class);
             }
+          }
+          if(support_type == "romantic"){
+            model.set({romantic_support_classes: added_classes});
+          }
+          else{
+            model.set({aplus_support_classes: added_classes});
           }
           model.set({class: current_classes});
           model.trigger('change:class');
         }
       })(this, support));
     },
+
+    removeOldSupportClasses: function(class_array, old_support_classes){
+      for(var i=0; i<old_support_classes.length; i++){
+        var index = class_array.indexOf(old_support_classes[i]);
+        if(index > -1){
+          class_array.splice(index, 1);
+        }
+      }
+    },
+
 
     getClassStats: function(class_name){
       $.getJSON(json_path+'classes.json', (function(model, class_name){

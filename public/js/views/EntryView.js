@@ -25,12 +25,12 @@ define([
 
     addAplusSupportBaseClasses: function(){
       var selected_support = this.$('#aplus_supports').val();
-      this.model.addSupportClasses(selected_support);
+      this.model.addSupportClasses(selected_support, "aplus");
     },
 
     addRomanticSupportBaseClasses: function(){
       var selected_support = this.$('#romantic_supports').val();
-      this.model.addSupportClasses(selected_support);
+      this.model.addSupportClasses(selected_support, "romantic");
     },
 
     getCharacterData: function(){

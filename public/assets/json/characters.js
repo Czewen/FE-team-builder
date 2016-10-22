@@ -150,7 +150,7 @@
    "Hinata":{
     "stat_mods": {"str": 1, "mag": 0, "skl": -1, "spd": -2, "lck": 0, "def": 2, "res": 0},
     "gender": "male",
-    "base_class": ["Samurai", "Sword Master", "Onmyoji" ],
+    "base_class": ["Samurai", "Sword Master", "Master of Arms" ],
     "class": ["Oni Savage", "Blacksmith", "Oni Chieftain"]
   },
 
